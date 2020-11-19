@@ -3,6 +3,9 @@ class Track:
         self.name = name
         self.duration = duration
 
+    def __str__(self):
+        return f'{self.name} {self.duration}'
+
     def show(self):
         print(f'{self.name} - {self.duration}')
 
