@@ -6,6 +6,9 @@ class Track:
     def __str__(self):
         return f'{self.name} {self.duration}'
 
+    def __repr__(self):
+        return f'{self.name} {self.duration}'
+
     def show(self):
         print(f'{self.name} - {self.duration}')
 
