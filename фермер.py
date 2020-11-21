@@ -1,35 +1,59 @@
-class Hoofs:
-    def __init__(self, name, animal, weight, voice, milk=0, hair=0):
+class Cow:
+    def __init__(self, name, animal, weight, voice, milk=0):
         self.name = name
         self.animal = animal
         self.weight = weight
         self.milk = milk
-        self.hair = hair
         self.voice = voice
 
     def eat(self, food):
         self.weight += food
 
     def tomilk(self, milkk):
-        if self.animal != 'Овца':
-            self.milk -= milkk
-        else:
-            print('Овцы не доятся')
+        self.milk -= milkk
+
+    def voice1(self):
+        print('Муму')
+
+
+class Goat:
+    def __init__(self, name, animal, weight, voice, milk=0):
+        self.name = name
+        self.animal = animal
+        self.weight = weight
+        self.milk = milk
+        self.voice = voice
+
+    def eat(self, food):
+        self.weight += food
+
+    def tomilk(self, milkk):
+        self.milk -= milkk
+
+    def voice1(self):
+        print('Мее')
+
+
+class Sheep:
+    def __init__(self, name, animal, weight, voice, hair=0):
+        self.name = name
+        self.animal = animal
+        self.weight = weight
+        self.hair = hair
+        self.voice = voice
+
+    def eat(self, food):
+        self.weight += food
 
     def cut(self, long):
         if self.animal == 'Овца':
             self.hair -= long
 
     def voice1(self):
-        if self.animal == 'Корова':
-            print('Муму')
-        elif self.animal == 'Коза':
-            print('Мее')
-        elif self.animal == 'Овца':
-            print('Бее')
+       print('Бее')
 
 
-class Birds:
+class Goose:
     def __init__(self, name, animal, weight, voice, eggs=0):
         self.name = name
         self.animal = animal
@@ -44,24 +68,55 @@ class Birds:
         self.eggs -= get
 
     def voice1(self):
-        if self.animal == 'Гусь':
-            print('Гага')
-        elif self.animal == 'Курица':
-            print('Коко')
-        elif self.animal == 'Утка':
-            print('Крякря')
+        print('Гага')
 
 
-goose1 = Birds('Серый', 'Гусь', 3, 'Гага', 4)
-goose2 = Birds('Белый', 'Гусь', 3, 'Гага', 4)
-hen1 = Birds('Ко-Ко', 'Курица', 3, 'Коко', 4)
-hen2 = Birds('Кукареку', 'Курица', 3, 'Коко', 4)
-duck = Birds('Кряква', 'Утка', 3, 'Крякря', 4)
-cow = Hoofs('Манька', 'Корова', 100, 'Муму', 4, 0)
-goat1 = Hoofs('Рога', 'Коза', 35, 'Мее', 1, 0)
-goat2 = Hoofs('Копыта', 'Коза', 25, 'Мее', 2, 0,)
-sheep1 = Hoofs('Барашек', 'Овца', 25, 'Бее', 0, 2,)
-sheep2 = Hoofs('Кудрявый', 'Овца', 25, 'Бее', 0, 2,)
+class Hen:
+    def __init__(self, name, animal, weight, voice, eggs=0):
+        self.name = name
+        self.animal = animal
+        self.weight = weight
+        self.eggs = eggs
+        self.voice = voice
+
+    def eat(self, food):
+        self.weight += food
+
+    def geteggs(self, get):
+        self.eggs -= get
+
+    def voice1(self):
+        print('Коко')
+
+
+class Duck:
+    def __init__(self, name, animal, weight, voice, eggs=0):
+        self.name = name
+        self.animal = animal
+        self.weight = weight
+        self.eggs = eggs
+        self.voice = voice
+
+    def eat(self, food):
+        self.weight += food
+
+    def geteggs(self, get):
+        self.eggs -= get
+
+    def voice1(self):
+        print('Крякря')
+
+
+goose1 = Goose('Серый', 'Гусь', 3, 'Гага', 4)
+goose2 = Goose('Белый', 'Гусь', 3, 'Гага', 4)
+hen1 = Hen('Ко-Ко', 'Курица', 3, 'Коко', 4)
+hen2 = Hen('Кукареку', 'Курица', 3, 'Коко', 4)
+duck = Duck('Кряква', 'Утка', 3, 'Крякря', 4)
+cow = Cow('Манька', 'Корова', 100, 'Муму', 4)
+goat1 = Goat('Рога', 'Коза', 35, 'Мее', 1)
+goat2 = Goat('Копыта', 'Коза', 25, 'Мее', 2)
+sheep1 = Sheep('Барашек', 'Овца', 25, 'Бее', 2)
+sheep2 = Sheep('Кудрявый', 'Овца', 25, 'Бее', 2)
 
 animals_dic = {goose1.name: goose1.weight, goose2.name: goose2.weight,
                hen1.name: hen1.weight, hen2.name: hen2.weight,
