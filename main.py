@@ -12,7 +12,6 @@ class Track:
     def show(self):
         print(f'{self.name} - {self.duration}')
 
-
 class Album:
     def __init__(self, alb_name, gr_name):
         self.tracks = []
@@ -25,7 +24,29 @@ class Album:
     def add_tracks(self, track):
         self.tracks.append(track)
 
-    # def get_duration(self):
+    def info(self):
+        print(self.tracks)
+
+        for track in self.tracks:
+            info = f'тип - {type(track)}  что на печать выведет - {track}'
+            print(info)
+            return info
+
+    def info_2(self):
+        for track in self.tracks:
+            print(f'название - {track.name}  продолжительность - {track.duration}')
+
+    def info_3(self):
+        for track in self.tracks:
+            print(track)
+
+    def get_duration(self):
+        duration = 0
+        for track in self.tracks:
+            duration += track.duration
+
+        print(duration)
+        return duration
 
 
 tone = Track('Nm', 2)
@@ -42,3 +63,11 @@ aone.add_tracks(tthree)
 atwo.add_tracks(tone)
 atwo.add_tracks(ttwo)
 atwo.add_tracks(tthree)
+
+aone.get_duration()
+print('')
+aone.info()
+print('')
+aone.info_2()
+print('')
+aone.info_3()
