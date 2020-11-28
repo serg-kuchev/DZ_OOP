@@ -9,10 +9,11 @@ def readfile(name):
 
 
 def count(text):
+    n = int(input('Введите количество буквы:'))
     new_list = text.split(' ')
     word_value = {}
     for word in new_list:
-        if len(word) > 6:
+        if len(word) > n:
             if word in word_value:
                 word_value[word] += 1
             else:
@@ -21,6 +22,7 @@ def count(text):
 
 
 def sort(word_value):
+    ccount = int(input('Введите количество слов ')) + 1
     l = lambda word_value: word_value[1]
     sort_list = sorted(word_value.items(), key=l, reverse=True)
     count = 1
@@ -28,7 +30,7 @@ def sort(word_value):
     for word in sort_list:
         top[count] = word
         count += 1
-        if count == 10:
+        if count == ccount:
             break
     return top
 
@@ -41,11 +43,3 @@ def main():
 
 
 main()
-# sort(word_value)
-
-
-# print(count(text))
-# print(sort(word_value))
-# print(json_data['rss']['channel']['items'])
-
-    # print(json_data)
