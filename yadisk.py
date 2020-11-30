@@ -19,5 +19,3 @@ with open('VL_Kursach.docx', 'rb') as f:
     resp2 = requests.put(href, files={'file': f})
 
 resp2.raise_for_status()
-
-pprint(d)
