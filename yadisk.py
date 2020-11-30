@@ -20,3 +20,4 @@ with open('VL_Kursach.docx', 'rb') as f:
 
 resp2.raise_for_status()
 pr
+ggff
