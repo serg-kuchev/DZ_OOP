@@ -9,7 +9,7 @@ def readfile(name):
         return text.text
 
 
-def count(text):
+def count(n, text):
     new_list = text.split(' ')
     word_value = {}
     for word in new_list:
@@ -21,7 +21,7 @@ def count(text):
     return word_value
 
 
-def sort(word_value):
+def sort(ccount, word_value):
     l = lambda word_value: word_value[1]
     sort_list = sorted(word_value.items(), key=l, reverse=True)
     count = 1
@@ -29,19 +29,19 @@ def sort(word_value):
     for word in sort_list:
         top[count] = word
         count += 1
-        if count == ccount:
+        if count == ccount+1:
             break
     return top
 
 
 def main():
-    top_10 = sort(count(readfile(name)))
+    top_10 = third
     for i in top_10.values():
         print(i[1], ': ', i[0])
 
 
-name = input('Введите имя файла: ')
-ccount = int(input('Введите количество слов ')) + 1
-n = int(input('Введите количество букв: '))
+first = readfile('newsafr.xml')
+second = count(6, first)
+third = sort(10, second)
 
 main()
