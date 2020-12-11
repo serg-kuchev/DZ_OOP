@@ -29,7 +29,7 @@ for item in photos['response']['items']:
     url.append(item['sizes'][9]['url'])
 
 ph = dict(zip(name, url))
-
+# print(*ph.values())
 with open('tokenya.txt', 'r') as file_object:
     tokenya = file_object.read().strip()
 
@@ -37,7 +37,7 @@ HEADERS = {'Authorization': tokenya}
 for like, photo in ph.items():
     resp = requests.get(
         'https://cloud-api.yandex.net/v1/disk/resources/upload',
-        params={'url': photo, 'path': str(like)},
+        params={'url': photo, 'path': '/diploma/'+str(like)+'.jpg'},
         headers=HEADERS
     )
     resp.raise_for_status()
