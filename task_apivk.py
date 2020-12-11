@@ -28,30 +28,9 @@ class VkUser:
         res = requests.get(friends_url, params={**self.params, **friends_params})
         return res.json()
 
-    def __and__(self, user1, user2):
-        c = user_1 and user_2
-        return c
-
-
-
-        # return(user1['response']['items'] & user2['response']['items'])
-
-    # def get_id(self, user_id=None):
-    #     if user_id is None:
-    #         user_id = self.owner_id
-    #     id_url = self.url + 'account.getProfileInfo'
-    #     id_params = {
-    #         'user_id': user_id
-    #     }
-    #     res = requests.get(id_url, params=id_params)
-    #     return res.json()
-
-
 
 vk_client = VkUser(token, '5.126')
-friends_1 = vk_client.get_friend()
+friends_1 = vk_client.get_friend(91491123)
 friends_2 = vk_client.get_friend(40242864)
-print(friends_1 and friends_2)
-# print(f'vk.com/id{str(vk_client.owner_id)}')
 
-
+print(set(friends_1['response']['items']) & set(friends_2['response']['items']))
