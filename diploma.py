@@ -1,5 +1,10 @@
 import requests
 from pprint import pprint
+from tqdm import tqdm
+
+pbar = tqdm(total=100)
+
+
 with open('token.txt', 'r') as file_object:
     token = file_object.read().strip()
 
@@ -37,11 +42,17 @@ HEADERS = {'Authorization': tokenya}
 for like, photo in ph.items():
     resp = requests.get(
         'https://cloud-api.yandex.net/v1/disk/resources/upload',
-        params={'url': photo, 'path': '/diploma/'+str(like)+'.jpg'},
+        params={'path': '/diploma/'+str(like)+'.jpg'},
         headers=HEADERS
     )
     resp.raise_for_status()
     d = resp.json()
     href = d['href']
-    resp2 = requests.put(href)
+    resp2 = requests.put(href,
+        'https://cloud-api.yandex.net/v1/disk/resources/upload',
+        params={'url': photo},
+        headers=HEADERS)
     resp2.raise_for_status()
+
+
+pbar.close()
