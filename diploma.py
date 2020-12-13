@@ -44,11 +44,10 @@ for item in photos['response']['items']:
         'size': str(item['sizes'][9]['type'])
     }
     data.append(d)
-    with open('photos_info.json', 'w') as f:
-        json.dump(data, f, ensure_ascii=False, indent=1)
     time.sleep(2)
     loop.update(1)
-
+with open('photos_info.json', 'w') as f:
+    json.dump(data, f, ensure_ascii=False, indent=1)
 ph = dict(zip(name, url))
 
 with open('tokenya.txt', 'r') as file_object:
