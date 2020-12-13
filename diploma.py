@@ -1,12 +1,7 @@
 import requests
-from pprint import pprint
+import time
 from tqdm import tqdm
-
-pbar = tqdm(total=100)
-
-
-with open('token.txt', 'r') as file_object:
-    token = file_object.read().strip()
+import json
 
 
 def get_photos(id, version):
@@ -26,33 +21,48 @@ def get_photos(id, version):
     res = requests.get(photo_url, params=photo_params)
     return res.json()
 
-photos = get_photos(40242864, '5.126')
+
+idvk = int(input('Введите id пользователя: '))
+tokenya = str(input('Введите токен вашего Яндекс.Диска: '))
+
+loop = tqdm(total=1, position=0, leave=False)
+loop_1 = tqdm(total=5, position=0, leave=False)
+
+with open('token.txt', 'r') as file_object:
+    token = file_object.read().strip()
+
+photos = get_photos(idvk, '5.126')
 name = []
 url = []
+data = []
 for item in photos['response']['items']:
+    loop.set_description('Загружаю URL фотографий...'.format(item))
     name.append(item['likes']['count'])
     url.append(item['sizes'][9]['url'])
+    d = {
+        'file_name': str(item['likes']['count']) + '.jpg',
+        'size': str(item['sizes'][9]['type'])
+    }
+    data.append(d)
+    with open('photos_info.json', 'w') as f:
+        json.dump(data, f, ensure_ascii=False, indent=1)
+    time.sleep(2)
+    loop.update(1)
 
 ph = dict(zip(name, url))
-# print(*ph.values())
+
 with open('tokenya.txt', 'r') as file_object:
     tokenya = file_object.read().strip()
 
-HEADERS = {'Authorization': tokenya}
+HEADERS = {'Authorization': 'OAuth'+str(tokenya)}
+
 for like, photo in ph.items():
-    resp = requests.get(
+    loop_1.set_description('Загружаю фотографии на Яндекс.Диск...'.format(like))
+    resp = requests.post(
         'https://cloud-api.yandex.net/v1/disk/resources/upload',
-        params={'path': '/diploma/'+str(like)+'.jpg'},
+        params={'url': photo, 'path': '/diploma/'+str(like)+'.jpg', 'disable_redirects': 'false'},
         headers=HEADERS
     )
     resp.raise_for_status()
-    d = resp.json()
-    href = d['href']
-    resp2 = requests.put(href,
-        'https://cloud-api.yandex.net/v1/disk/resources/upload',
-        params={'url': photo},
-        headers=HEADERS)
-    resp2.raise_for_status()
 
-
-pbar.close()
+    loop_1.update(1)
