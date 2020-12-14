@@ -21,7 +21,6 @@ def get_photos(id, version):
     res = requests.get(photo_url, params=photo_params)
     return res.json()
 
-
 idvk = int(input('Введите id пользователя: '))
 tokenya = str(input('Введите токен вашего Яндекс.Диска: '))
 
@@ -36,18 +35,20 @@ name = []
 url = []
 data = []
 for item in photos['response']['items']:
-    loop.set_description('Загружаю URL фотографий...'.format(item))
+    # loop.set_description('Загружаю URL фотографий...'.format(item))
     name.append(item['likes']['count'])
-    url.append(item['sizes'][9]['url'])
+    b = len(item['sizes'])
+    url.append(item['sizes'][b-1]['url'])
     d = {
         'file_name': str(item['likes']['count']) + '.jpg',
-        'size': str(item['sizes'][9]['type'])
+        'size': str(item['sizes'][b-1]['type'])
     }
     data.append(d)
     time.sleep(2)
     loop.update(1)
 with open('photos_info.json', 'w') as f:
     json.dump(data, f, ensure_ascii=False, indent=1)
+
 ph = dict(zip(name, url))
 
 with open('tokenya.txt', 'r') as file_object:
