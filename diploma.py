@@ -35,7 +35,7 @@ name = []
 url = []
 data = []
 for item in photos['response']['items']:
-    # loop.set_description('Загружаю URL фотографий...'.format(item))
+    loop.set_description('Загружаю URL фотографий...'.format(item))
     name.append(item['likes']['count'])
     b = len(item['sizes'])
     url.append(item['sizes'][b-1]['url'])
@@ -51,10 +51,14 @@ with open('photos_info.json', 'w') as f:
 
 ph = dict(zip(name, url))
 
-with open('tokenya.txt', 'r') as file_object:
-    tokenya = file_object.read().strip()
+HEADERS = {'Authorization': 'OAuth'+' '+str(tokenya)}
+resp1 = requests.put(
+    'https://cloud-api.yandex.net/v1/disk/resources',
+    params={'path': 'diploma'},
+    headers=HEADERS
+)
+resp1.raise_for_status()
 
-HEADERS = {'Authorization': 'OAuth'+str(tokenya)}
 
 for like, photo in ph.items():
     loop_1.set_description('Загружаю фотографии на Яндекс.Диск...'.format(like))
